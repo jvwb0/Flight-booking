@@ -1,8 +1,6 @@
 <?php
-    $pdo = new PDO('mysql:host=localhost;dbname=BrownJustin','root','');
-?>
 
-<?php
+
     $select = "SELECT * FROM benutzer;";
     foreach ($pdo->query($select) as $row) {
         $Vorname = $row['Vorname'];
