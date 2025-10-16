@@ -19,11 +19,26 @@
     </nav>
   </header>
 
+  
+
   <!-- Hero -->
   <section class="hero">
     <h1 class="hero-title">Your next trip starts here</h1>
     <p class="hero-sub">Warm destinations, simple booking.</p>
   </section>
+
+<?php
+$images = [
+   "../assets/img/img3.jpg",
+   "../assets/img/img2.jpg",
+   "../assets/img/img4.jpg",
+   "../assets/img/img1.jpg"
+  ];
+$pick = $images[array_rand($images)];
+?>
+<section class="banner">
+  <img src="<?= $pick ?>" alt="Banner" class="banner-img">
+</section>
 
   <!-- Flight Search -->
   <main class="card search-card">
