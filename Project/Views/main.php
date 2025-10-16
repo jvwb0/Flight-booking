@@ -34,7 +34,7 @@ $images = [
    "../assets/img/img4.jpg",
    "../assets/img/img1.jpg"
   ];
-$pick = $images[array_rand($images)];
+$pick = $images[array_rand($images)];   // https://stackoverflow.com/questions/1761252/how-to-get-random-image-from-directory-using-php
 ?>
 <section class="banner">
   <img src="<?= $pick ?>" alt="Banner" class="banner-img">
@@ -93,7 +93,7 @@ $pick = $images[array_rand($images)];
   </main>
 
   <footer class="footer">
-    <small>© Sunset Air — made for a school project</small>
+    <small>© BSZ AIR — made for a school project</small>
   </footer>
 </body>
 </html>

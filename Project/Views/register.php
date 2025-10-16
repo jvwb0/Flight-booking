@@ -11,17 +11,17 @@
     <h1 class="title">Create Account</h1>
 
     <form class="form" method="post">
-      <label class="label" for="fullname">Full Name</label>
-      <input class="input" id="fullname" name="fullname" type="text" required>
+      <label class="label" for="first name">First Name</label>
+      <input class="input" id="first name" name="first name" type="text" required>
+
+      <label class="label" for="last name">Last Name</label>
+      <input class="input" id="last name" name="last name" type="text" required>
 
       <label class="label" for="email">Email Address</label>
       <input class="input" id="email" name="email" type="email" required>
 
       <label class="label" for="username">Username</label>
       <input class="input" id="username" name="username" type="text" required>
-
-      <label class="label" for="phone">Phone Number</label>
-      <input class="input" id="phone" name="phone" type="tel" required>
 
       <label class="label" for="password">Password</label>
       <input class="input" id="password" name="password" type="password" required>
