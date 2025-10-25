@@ -1,6 +1,6 @@
 <?php
 session_start();
-require 'db.php';
+require '../assets/db.php';
 
 if (isset($_POST['login_button']))
 {

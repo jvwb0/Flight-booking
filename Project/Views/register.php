@@ -1,5 +1,5 @@
 <?php
-require 'db.php';
+require '../assets/db.php';
 
 if (isset($_POST['signup_button'])) {
   $first_name = $_POST['first_name'];
