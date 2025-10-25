@@ -1,3 +1,15 @@
+<?php
+require '../assets/db.php';
+$airports  = $pdo->query("SELECT iata, name 
+                          FROM airports 
+                          ORDER BY iata");
+$countries = $pdo->query("SELECT name 
+                          FROM countries 
+                          ORDER BY name");
+?>
+
+
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -18,8 +30,6 @@
       <a class="nav-link strong" href="register.php">Sign Up</a>
     </nav>
   </header>
-
-  
 
   <!-- Hero -->
   <section class="hero">
@@ -44,16 +54,16 @@ $pick = $images[array_rand($images)];   // https://stackoverflow.com/questions/1
   <main class="card search-card">
     <h2 class="title" style="margin-bottom:12px;">Search Flights</h2>
 
-    <form class="form search-form" method="get">
+    <form class="form search-form" method="get" action="results.php">
       <div class="row">
         <div class="field">
           <label class="label" for="from">From</label>
-          <input class="input" id="from" name="from" type="text" placeholder="e.g., Berlin (BER)" required>
+          <input class="input" id="from" name="from" type="text" list="places" placeholder="e.g., BER or Germany" required>
         </div>
 
         <div class="field">
           <label class="label" for="to">To</label>
-          <input class="input" id="to" name="to" type="text" placeholder="e.g., Lisbon (LIS)" required>
+          <input class="input" id="to" name="to" type="text" list="places" placeholder="e.g., MAD or Spain" required>
         </div>
       </div>
 
@@ -69,27 +79,21 @@ $pick = $images[array_rand($images)];   // https://stackoverflow.com/questions/1
         </div>
       </div>
 
-      <div class="row">
-        <div class="field">
-          <label class="label" for="passengers">Passengers</label>
-          <select class="input" id="passengers" name="passengers">
-            <option>1</option><option>2</option><option>3</option>
-            <option>4</option><option>5</option><option>6</option>
-          </select>
-        </div>
-
-        <div class="field">
-          <label class="label" for="class">Class</label>
-          <select class="input" id="class" name="class">
-            <option value="economy">Economy</option>
-            <option value="premium">Premium Economy</option>
-            <option value="business">Business</option>
-          </select>
-        </div>
-      </div>
-
       <button class="btn" type="submit">Search Flights</button>
     </form>
+
+    <datalist id="places">              <!-- Datalist: https://www.w3schools.com/tags/tag_datalist.asp -->
+      <?php
+        while ($row = $airports->fetch())
+        {
+          echo "<option value='" . $row["iata"] . "'>" . $row["name"] . "</option>";
+        }
+        while ($row2 = $countries->fetch())
+        {
+          echo "<option value='" . $row2["name"] . "'>" . $row2["name"] . "</option>";
+        }
+      ?>
+    </datalist>
   </main>
 
   <footer class="footer">
