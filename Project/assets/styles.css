@@ -18,36 +18,6 @@ body
   justify-content: center;
   padding: 24px;}
 
-/* Results Page table output results thingy*/
-table {
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 0 6px;}
-
-th, td {
-  padding: 12px 10px;
-  border-bottom: 1px solid #eee;
-text-align: left;}
-
-th{
-  background: #fff3ea;
-  color: #c25f00;
-  text-align: left;}
-
-tr:hover {
-  background: #fff8f3; }
-
-.backlink {
-  display: inline-block;
-  margin-top: 16px;
-  text-decoration: none;
-  color: #00a896;
-  font-weight: 600;}
-
-.backlink:hover {
-  text-decoration: underline; 
-  color: #028090; }
-
 .card 
 {
   width: 100%;
