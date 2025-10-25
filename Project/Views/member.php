@@ -18,6 +18,8 @@ if (!isset($_SESSION['username']))
     <h1 class="title">Hi, <?php echo $_SESSION['username']; ?></h1>
     <p class="sub">Choose an action:</p>
     <p>
+        <!-- I would love to have the member still be 
+         logged in when redirected to the home page !-->
       <a class="link" href="main.php">Find flights</a> |
       <a class="link" href="my_bookings.php">My bookings</a> |
       <a class="link" href="logout.php">Logout</a>
