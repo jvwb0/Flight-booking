@@ -4,19 +4,26 @@ require 'db.php';
 
 if (isset($_POST['login_button']))
 {
-    $username = $_POST['username'];
+    $identifier = $_POST['identifier'];
     $password = $_POST['password'];
 
-    $sql = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
-    $result = $pdo->query($sql);
-    $user = $result->fetch();
+    $befehl = $pdo->prepare(
+      "SELECT * FROM users 
+      WHERE username = ? OR email = ? 
+      AND password = ?"
+      );
+    $befehl->execute(array($identifier, $identifier, $password));
 
-    if ($user){
+    $user = $befehl->fetch();
+
+    if ($user)
+      {
         $_SESSION['username'] = $user['username'];
         $_SESSION['email'] = $user['email'];
         header("Location: member.php");
         exit;
-    }else{
+    }else
+    {
         $error = "Wrong username or password.";
     }
 }
@@ -32,7 +39,6 @@ if (isset($_POST['login_button']))
 <body>
   <main class="card">
     <h1 class="title">Welcome back</h1>
-
     <?php
       if (isset($error)) 
       {

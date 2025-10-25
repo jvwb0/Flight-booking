@@ -8,12 +8,11 @@ if (isset($_POST['signup_button'])) {
   $username   = $_POST['username'];
   $password   = $_POST['password'];
 
-  $sql = "INSERT INTO users 
-          (first_name, last_name, email, username, password)
-          VALUES ('$first_name','$last_name','$email','$username','$password')";
-  $pdo->query($sql);
+  $befehl = $pdo->prepare("INSERT INTO users (first_name, last_name, email, username, password)
+                          VALUES (?, ?, ?, ?, ?)");
+  $befehl->execute(array($first_name, $last_name, $email, $username, $password));
 
-  echo "Account created for ".$username."<br>";
+  echo "Account created for ". $username ."<br>";
   echo "<a href='login.php'>Go to login</a>";
 }
 ?>
