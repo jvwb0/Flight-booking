@@ -1,3 +1,23 @@
+<?php
+require 'db.php';
+
+if (isset($_POST['signup_button'])) {
+  $first_name = $_POST['first_name'];
+  $last_name  = $_POST['last_name'];
+  $email      = $_POST['email'];
+  $username   = $_POST['username'];
+  $password   = $_POST['password'];
+
+  $sql = "INSERT INTO users 
+          (first_name, last_name, email, username, password)
+          VALUES ('$first_name','$last_name','$email','$username','$password')";
+  $pdo->query($sql);
+
+  echo "Account created for ".$username."<br>";
+  echo "<a href='login.php'>Go to login</a>";
+}
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -29,7 +49,7 @@
       <label class="label" for="confirm">Confirm Password</label>
       <input class="input" id="confirm" name="confirm" type="password" required>
 
-      <button class="btn" type="submit">Sign Up</button>
+      <button class="btn" type="submit" name ="signup_button">Sign Up</button>
 
       <div class="links">
         <a class="link" href="login.php">Already have an account?</a>

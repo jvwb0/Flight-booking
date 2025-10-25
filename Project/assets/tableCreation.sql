@@ -40,6 +40,10 @@ CREATE TABLE users (
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+ALTER TABLE users 
+  ADD first_name VARCHAR(50),
+  ADD last_name  VARCHAR(50);
+
 CREATE TABLE bookings (
   id INT AUTO_INCREMENT PRIMARY KEY,
   user_id INT,

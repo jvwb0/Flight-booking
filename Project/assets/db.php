@@ -1,3 +1,3 @@
 <?php
-    $pdo = new PDO('mysql:host=localhost;dbname=BrownJustin','root','');
+    $pdo = new PDO('mysql:host=localhost;dbname=flight_app','root','');
 ?>
