@@ -1,3 +1,26 @@
+<?php
+session_start();
+require 'db.php';
+
+if (isset($_POST['login_button']))
+{
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    $sql = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
+    $result = $pdo->query($sql);
+    $user = $result->fetch();
+
+    if ($user){
+        $_SESSION['username'] = $user['username'];
+        $_SESSION['email'] = $user['email'];
+        header("Location: member.php");
+        exit;
+    }else{
+        $error = "Wrong username or password.";
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,6 +33,12 @@
   <main class="card">
     <h1 class="title">Welcome back</h1>
 
+    <?php
+      if (isset($error)) 
+      {
+        echo "<p style='color:red;'>$error</p>";
+      }
+    ?>
     <form class="form" method="post">
       <label class="label" for="identifier">Email or Username</label>
       <input class="input" id="identifier" name="identifier" type="text" required>
@@ -17,7 +46,7 @@
       <label class="label" for="password">Password</label>
       <input class="input" id="password" name="password" type="password" required>
 
-      <button class="btn" type="submit">Log in</button>
+      <button class="btn" type="submit" name="login_button">Log in</button>
 
       <div class="links">
         <a class="link" href="register.php">Create account</a>
