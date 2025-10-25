@@ -9,6 +9,11 @@ $sql = "SELECT f.id, al.name AS airline,
                      a2.iata AS destination,
                     f.depart_time, f.arrive_time, f.price
         FROM flights f
+        JOIN airlines al ON al.id = f.airline_id
+        JOIN airports a1 ON a1.id = f.origin_airport_id
+        JOIN airports a2 ON a2.id = f.destination_airport_id
+        JOIN countries c1 ON c1.id = a1.country_id
+        JOIN countries c2 ON c2.id = a2.country_id
         WHERE (a1.iata = ? OR c1.name = ?)
         AND (a2.iata = ? OR c2.name = ?)
         ORDER BY f.depart_time";
@@ -33,6 +38,10 @@ $befehl->execute(array($from, $from, $to, $to));
            $r['depart_time']." → ".$r['arrive_time']." | ".
            $r['price']." EUR ".
            "<a class='link' href='book.php?fid=".$r['id']."'>book</a><br>";
+    }
+    if ($befehl->rowCount() == 0)
+    {
+        echo "No flights found.<br>";
     }
   ?>
     <br><a class="link" href="main.php">Back</a>

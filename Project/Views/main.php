@@ -70,7 +70,7 @@ $pick = $images[array_rand($images)];   // https://stackoverflow.com/questions/1
       <div class="row">
         <div class="field">
           <label class="label" for="depart">Depart</label>
-          <input class="input" id="depart" name="depart" type="date" required>
+          <input class="input" id="depart" name="depart" type="date">
         </div>
 
         <div class="field">
