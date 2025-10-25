@@ -3,11 +3,13 @@ require '../assets/db.php';
 
 $from   = $_GET['from'];
 $to     = $_GET['to'];
+$sort = isset($_GET['sort']) ? $_GET['sort'] : 'asc';
+$order = ($sort == 'desc') ? 'DESC' : 'ASC';
 
 $sql = "SELECT f.id, al.name AS airline,
                      a1.iata AS origin, 
                      a2.iata AS destination,
-                    f.depart_time, f.arrive_time, f.price
+                     f.price
         FROM flights f
         JOIN airlines al ON al.id = f.airline_id
         JOIN airports a1 ON a1.id = f.origin_airport_id
@@ -16,7 +18,7 @@ $sql = "SELECT f.id, al.name AS airline,
         JOIN countries c2 ON c2.id = a2.country_id
         WHERE (a1.iata = ? OR c1.name = ?)
         AND (a2.iata = ? OR c2.name = ?)
-        ORDER BY f.depart_time";
+        ORDER BY f.price $order";
 
 $befehl = $pdo->prepare($sql);
 $befehl->execute(array($from, $from, $to, $to));
@@ -27,61 +29,11 @@ $befehl->execute(array($from, $from, $to, $to));
 <head>
   <meta charset="utf-8">
   <title>Results</title>
-  <link rel="stylesheet" href="../assets/styles.css">  <!--https://www.geeksforgeeks.org/php/how-to-fetch-data-from-localserver-database-and-display-on-html-table-using-php/!-->
-  <style>
-  table {
-    margin: 0 auto;
-    width: 90%;
-    border-collapse: collapse;
-    font-family: system-ui, Arial, sans-serif;
-    font-size: 15px;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 18px rgba(0,0,0,0.08);
-  }
-
-  th {
-    background-color: #ff914d;
-    color: white;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    font-weight: 600;
-    padding: 14px;
-  }
-
-  td {
-    padding: 12px 14px;
-    border-bottom: 1px solid #f3e7db;
-    text-align: center;
-    background-color: #fffaf6;
-  }
-
-  tr:nth-child(even) td {
-    background-color: #fff3ea;
-  }
-
-  tr:hover td {
-    background-color: #ffe5cc;
-  }
-
-  .book {
-    background: linear-gradient(90deg, #ff914d, #f57b51);
-    color: white;
-    padding: 6px 12px;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 0.9rem;
-  }
-
-  .book:hover {
-    filter: brightness(1.1);
-  }
-    </style>
+  <link rel="stylesheet" href="../assets/styles.css">  <!--https://www.geeksforgeeks.org/php/how-to-fetch-data-from-localserver-database-and-display-on-html-table-using-php/!-->  
 </head>
-<body>
-    <h1 class="title" style="color:#d36b00;text-align:center;">Available Flights</h1>
-
+<body class="results-view">
+    <div class="results-container">
+        <h1>Available Flights</h1>
     <table>
       <tr>
         <th>Airline</th>
