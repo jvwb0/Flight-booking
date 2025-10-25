@@ -31,7 +31,16 @@ $befehl->execute(array($from, $from, $to, $to));
 </head>
 <body>
   <main class="card">
-    <h1 class="title">Search Results</h1>
+    <h1 class="title" style="color:#d36b00;text-align:center;">Available Flights</h1>
+
+    <table>
+      <tr>
+        <th>Airline</th>
+        <th>From</th>
+        <th>To</th>
+        <th>Price (EUR)</th>
+      </tr>
+    </table>
   <?php
     while($r = $befehl->fetch()) {
       echo $r['airline']." | ".$r['origin']." → ".$r['destination']." | ".
