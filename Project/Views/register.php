@@ -12,8 +12,12 @@ if (isset($_POST['signup_button'])) {
                           VALUES (?, ?, ?, ?, ?)");
   $befehl->execute(array($first_name, $last_name, $email, $username, $password));
 
-  echo "Account created for ". $username ."<br>";
-  echo "<a href='login.php'>Go to login</a>";
+# pop up / dialog fenster ding
+  echo "<script>
+    alert('Account created. Please log in.');
+    window.location = 'login.php';
+    </script>";
+  exit;
 }
 ?>
 
