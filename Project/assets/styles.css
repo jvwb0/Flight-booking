@@ -18,10 +18,9 @@ body
   justify-content: center;
   padding: 24px;}
 
-.card 
+.card
 {
   width: 100%;
-  max-width: 420px;
   background: #ffffff;
   border: 1px solid #f3e7db;
   border-radius: 14px;
@@ -238,3 +237,6 @@ body.main-view
   0%, 45% { opacity: 1; }     /* visible for first half */
   50%, 100% { opacity: 0; }   /* fade out second half */
 }
+/*==================
+    RESULTS PAGE 
+*/
