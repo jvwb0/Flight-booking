@@ -58,6 +58,8 @@ if (isset($_POST['signup_button'])) {
         <a class="link" href="login.php">Already have an account?</a>
       </div>
     </form>
+    <button class="btn" style="width: 49%;" type="button" onclick="window.location.href='<?php echo $_SERVER['HTTP_REFERER'] ?? 'main.php'; ?>'">Back</button>
+    <button class="btn" style="width: 49%;" type="button" onclick="window.location.href='main.php'">Home</button>
   </main>
 </body>
 </html>

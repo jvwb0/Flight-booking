@@ -59,6 +59,8 @@ if (isset($_POST['login_button']))
         <a class="link" href="forgot_password.php">Forgot password?</a>
       </div>
     </form>
+    
+    <button class="btn" style="width: 15%;" type="button" onclick="window.location.href='<?php echo $_SERVER['HTTP_REFERER'] ?? 'main.php'; ?>'">Back</button>
   </main>
 </body>
 </html>

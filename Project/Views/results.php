@@ -126,7 +126,7 @@ $befehl->execute(array($from, $from, $to, $to));
     </main>
     <br>
     <footer class="footer">
-        <button class="btn" style="width: 15%;" type="button" onclick="window.location.href='main.php'">Back</button>
+    <button class="btn" style="width: 15%;" type="button" onclick="window.location.href='<?php echo $_SERVER['HTTP_REFERER'] ?? 'main.php'; ?>'">Back</button>
         <br><br><br><br><br><br><small>© BSZ AIR — made for a school project</small>
     </footer>
 </body>
