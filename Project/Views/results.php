@@ -1,4 +1,5 @@
 <?php
+session_start();
 require '../assets/db.php';
 
 $from   = $_GET['from'];
@@ -89,8 +90,14 @@ $befehl->execute(array($from, $from, $to, $to));
             <span class="brand-name">BSZ AIR</span>
         </div>
         <nav class="nav">
+          <?php if (!empty($_SESSION['username'])): ?>
+            <span class="nav-link">Hi, <strong><?= htmlspecialchars($_SESSION['username']) ?></strong></span>
+            <a class="nav-link" href="my_bookings.php">My bookings</a>
+            <a class="nav-link strong" href="logout.php">Logout</a>
+          <?php else: ?>
             <a class="nav-link" href="login.php">Login</a>
             <a class="nav-link strong" href="register.php">Sign Up</a>
+          <?php endif; ?>
         </nav>
     </header>
     <br><br>
@@ -113,7 +120,19 @@ $befehl->execute(array($from, $from, $to, $to));
                         <td><?php echo $row['origin']; ?></td>
                         <td><?php echo $row['destination']; ?></td>
                         <td><?php echo $row['price']; ?></td>
-                        <td><a class="book" href="book.php?fid=<?php echo $row['id']; ?>">Book</a></td>
+                        <td>
+                            <?php if (!empty($_SESSION['user_id'])): ?>
+                              <button class="book"type="button" data-fid="<?= (int)$row['id'] ?>"
+                                data-airline="<?= htmlspecialchars($row['airline']) ?>"
+                                data-origin="<?= htmlspecialchars($row['origin']) ?>"
+                                data-destination="<?= htmlspecialchars($row['destination']) ?>"
+                                data-price="<?= htmlspecialchars($row['price']) ?>"
+                                onclick="openBookDialog(this)"
+                            >Book</button>
+                          <?php else: ?>
+                            <a class="book" href="login.php">Login to book</a>
+                          <?php endif; ?>
+                      </td>
                     </tr>
                     <?php
                 }
@@ -129,5 +148,30 @@ $befehl->execute(array($from, $from, $to, $to));
     <button class="btn" style="width: 15%;" type="button" onclick="window.location.href='<?php echo $_SERVER['HTTP_REFERER'] ?? 'main.php'; ?>'">Back</button>
         <br><br><br><br><br><br><small>© BSZ AIR — made for a school project</small>
     </footer>
-</body>
+      <dialog id="bookDialog">
+        <form method="post" action="book.php" id="bookForm">
+          <h3 style="margin:0 0 8px 0;">Confirm booking</h3>
+          <p id="flightSummary" style="margin:0 0 10px 0;"></p>
+
+          <input type="hidden" name="fid" id="fid">
+
+          <label class="label" for="email">Confirmation email</label>
+          <input class="input" type="email" name="email" id="email" required
+              value="<?php echo isset($_SESSION['email']) ? htmlspecialchars($_SESSION['email']) : '';?>">
+          <div style="margin-top:12px; display:flex; gap:8px; justify-content:flex-end;">
+            <button class="btn" type="submit">Book & Send</button>
+            <button class="btn" type="button" onclick="document.getElementById('bookDialog').close()">Cancel</button>
+          </div>
+        </form>
+      </dialog>
+      <script>
+        function openBookDialog(btn){
+          const d = document.getElementById('bookDialog');
+          document.getElementById('fid').value = btn.dataset.fid;
+          document.getElementById('flightSummary').textContent =
+      `     ${btn.dataset.airline}  ${btn.dataset.origin} → ${btn.dataset.destination}  —  €${btn.dataset.price}`;
+          if (typeof d.showModal === 'function') d.showModal(); else d.show();
+          }
+      </script>
+    </body>
 </html>

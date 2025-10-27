@@ -9,7 +9,7 @@ if (isset($_POST['login_button']))
 
     $befehl = $pdo->prepare(
       "SELECT * FROM users 
-      WHERE username = ? OR email = ? 
+      WHERE (username = ? OR email = ?) 
       AND password = ?"
       );
     $befehl->execute(array($identifier, $identifier, $password));
@@ -18,6 +18,7 @@ if (isset($_POST['login_button']))
 
     if ($user)
       {
+        $_SESSION['user_id']  = $user['id'];
         $_SESSION['username'] = $user['username'];
         $_SESSION['email'] = $user['email'];
         header("Location: member.php");
