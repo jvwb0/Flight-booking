@@ -1,5 +1,6 @@
 <?php
 require '../assets/db.php';
+session_start();
 $airports  = $pdo->query("SELECT iata, name 
                           FROM airports 
                           ORDER BY iata");
@@ -26,8 +27,14 @@ $countries = $pdo->query("SELECT name
       <span class="brand-name">BSZ AIR</span>
     </div>
     <nav class="nav">
-      <a class="nav-link" href="login.php">Login</a>
-      <a class="nav-link strong" href="register.php">Sign Up</a>
+      <?php if (!empty($_SESSION['username'])): ?>
+        <span class="nav-link">Hi, <strong><?= htmlspecialchars($_SESSION['username']) ?></strong></span>
+        <a class="nav-link" href="my_bookings.php">My bookings</a>
+        <a class="nav-link strong" href="logout.php">Logout</a>
+      <?php else: ?>  
+        <a class="nav-link" href="login.php">Login</a>
+        <a class="nav-link strong" href="register.php">Sign Up</a>
+      <?php endif; ?>
     </nav>
   </header>
 
