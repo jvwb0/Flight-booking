@@ -3,11 +3,11 @@ session_start();
 require '../assets/db.php';
 
 // this gon make sure we logged in boy
-if (empty($_SESSION['user_id'])) {
+if (empty($_SESSION['user_id'])) 
+  {
   header("Location: login.php");
   exit;
 }
-
 $fid = 0;     // get the email n id from the pop up
 $email = '';
 
@@ -51,7 +51,7 @@ $statement->execute([$user_id, $fid]);
 // Save the new booking ID to the new one
 $bookingId = $pdo->lastInsertId();
 
-// EMAILLLLLLLLLLLLLLL
+// EMAILLLLLLLLLLLLLLL   we not doin this shi cuz i got better things to do
 $subject = "BSZ AIR Booking Confirmation #$bookingId";
 $body = "Hi {$_SESSION['username']},
 

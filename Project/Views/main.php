@@ -104,7 +104,10 @@ $pick = $images[array_rand($images)];   // https://stackoverflow.com/questions/1
   </main>
 
   <footer class="footer">
-    <small>© BSZ AIR — made for a school project</small>
+    <small>© BSZ AIR — made for a school project</small><br>
+    <?php
+      echo  date("H:i:s") . " — Have a great flight"; 
+    ?>          <!-- https://www.w3schools.com/php/func_date_date.asp -->
   </footer>
 </body>
 </html>

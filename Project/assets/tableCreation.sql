@@ -1,5 +1,3 @@
--- Datentabellen
----------------------------
 CREATE TABLE countries (
   id INT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(80),
@@ -53,9 +51,6 @@ CREATE TABLE bookings (
   FOREIGN KEY (flight_id) REFERENCES flights(id)
 );
 
--- CHATGPT Query : "lets fill the countries, airlines, airports, flights (imaginary)"
--- countries
--------------------------------------------
 INSERT INTO countries (name, code) VALUES
 ('Germany', 'DE'),
 ('Spain', 'ES'),
@@ -66,8 +61,6 @@ INSERT INTO countries (name, code) VALUES
 ('Canada', 'CA'),
 ('United Kingdom', 'UK');
 
--- airlines
------------------------------
 INSERT INTO airlines (name) VALUES
 ('Lufthansa'),
 ('Iberia'),
@@ -78,8 +71,6 @@ INSERT INTO airlines (name) VALUES
 ('Air Canada'),
 ('Alitalia');
 
--- Airports 
--------------------------------------------
 INSERT INTO airports (country_id, name, iata) VALUES
 -- Germany
 (1, 'Berlin Brandenburg', 'BER'),
@@ -116,10 +107,6 @@ INSERT INTO airports (country_id, name, iata) VALUES
 (8, 'London Heathrow', 'LHR'),
 (8, 'Manchester', 'MAN');
 
--- Flights
-----------------------------------------------------
---(25 realistic sample flights with date, time, airline, origin, destination, price)
--- Europe short-haul
 INSERT INTO flights (airline_id, origin_airport_id, destination_airport_id, depart_time, arrive_time, price)
 VALUES (
   (SELECT id FROM airlines  WHERE name='Lufthansa'),
@@ -259,10 +246,6 @@ INSERT INTO flights VALUES (
   (SELECT id FROM airports  WHERE iata='BER'),
   '2025-11-20 13:00','2025-11-20 19:00',699.00
 );
-
--- CHAT GPT Query :
--- "more flights please, maybe use the same origin and destinations but different times, prices with airlines"
--- More options for existing routes
 
 INSERT INTO flights VALUES
 -- BER -> MAD (Lufthansa, Iberia)

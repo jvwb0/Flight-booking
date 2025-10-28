@@ -31,25 +31,6 @@ $flights = $stmt->fetchAll(PDO::FETCH_ASSOC);
   <meta charset="utf-8">
   <title>Results</title>
   <link rel="stylesheet" href="../assets/styles.css">
-  <style>
-    table {
-      margin: 0 auto; width: 90%; border-collapse: collapse;
-      font-family: system-ui, Arial, sans-serif; font-size: 15px;
-      border-radius: 10px; overflow: hidden;
-      box-shadow: 0 4px 18px rgba(0,0,0,0.08);
-    }
-    th { background:#ff914d; color:#fff; text-transform:uppercase; letter-spacing:.5px; font-weight:600; padding:14px; }
-    td { padding:12px 14px; border-bottom:1px solid #f3e7db; text-align:center; background:#fffaf6; }
-    tr:nth-child(even) td { background:#fff3ea; }
-    tr:hover td { background:#ffe5cc; }
-    .book { background:linear-gradient(90deg,#ff914d,#f57b51); color:#fff; padding:6px 12px; border-radius:6px; text-decoration:none; font-weight:600; font-size:.9rem; }
-    .book:hover { filter:brightness(1.1); }
-    dialog { border: none; border-radius: 10px; padding: 16px 18px; box-shadow: 0 10px 30px rgba(0,0,0,.25); }
-    dialog::backdrop { background: rgba(0,0,0,.35); }
-    .label { display:block; margin:8px 0 6px; font-weight:600; }
-    .input { width:100%; padding:8px 10px; border:1px solid #ddd; border-radius:6px; }
-    .btn-row { margin-top:12px; display:flex; gap:8px; justify-content:flex-end; }
-  </style>
 </head>
 
 <body class="main-view">
@@ -71,10 +52,10 @@ $flights = $stmt->fetchAll(PDO::FETCH_ASSOC);
   </header>
 
   <br><br>
-  <h1 class="title" style="color:#d36b00;text-align:center;">Available Flights</h1>
+  <h1 class="title">Available Flights</h1>
 
   <main>
-    <table>
+    <table class="results-table">
       <tr>
         <th>Airline</th>
         <th>From</th>
@@ -84,7 +65,7 @@ $flights = $stmt->fetchAll(PDO::FETCH_ASSOC);
       </tr>
 
       <?php if (empty($flights)): ?>
-        <tr><td colspan="5" style="text-align:center;">No flights found.</td></tr>
+        <tr><td colspan="5">No flights found.</td></tr>
       <?php else: ?>
         <?php foreach ($flights as $row): ?>
           <tr>
@@ -112,16 +93,16 @@ $flights = $stmt->fetchAll(PDO::FETCH_ASSOC);
   </main>
 
   <footer class="footer">
-    <button class="btn" style="width: 15%;" type="button"
+    <button class="btn" type="button"
             onclick="window.location.href='<?php echo $_SERVER['HTTP_REFERER'] ?? 'main.php'; ?>'">Back</button>
     <br><br><br><br><br><br><small>© BSZ AIR — made for a school project</small>
   </footer>
 
-  <!-- SINGLE dialog (no duplicates) -->
+  <!-- pop up fensterrrrrrrrrr -->
   <dialog id="bookDialog">
     <form method="post" action="booking.php" id="bookForm">
-      <h3 style="margin:0 0 8px 0;">Confirm booking</h3>
-      <p id="flightSummary" style="margin:0 0 10px 0;"></p>
+      <h3>Confirm booking</h3>
+      <p id="flightSummary"></p>
 
       <input type="hidden" name="fid" id="fid">
 
