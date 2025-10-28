@@ -55,6 +55,12 @@ $flights = $stmt->fetchAll(PDO::FETCH_ASSOC);
   <h1 class="title">Available Flights</h1>
 
   <main>
+    <div style="text-align:center; margin-bottom:10px;">
+      <?php
+        echo '<a href="results.php?from=' . $from . '&to=' . $to . '&sort=asc">Sort by Price (Low to High)</a> | ';
+        echo '<a href="results.php?from=' . $from . '&to=' . $to . '&sort=desc">Sort by Price (High to Low)</a>';
+      ?>
+    </div>
     <table class="results-table">
       <tr>
         <th>Airline</th>
